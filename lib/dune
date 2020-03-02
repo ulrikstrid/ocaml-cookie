@@ -1,0 +1,4 @@
+(library
+ (name cookie)
+ (public_name cookie)
+ (libraries uri ptime base))
