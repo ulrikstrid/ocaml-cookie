@@ -1,7 +1,7 @@
-let result_t : [> `Msg of string | `Expired ] Alcotest.testable =
+let result_t : [> `Msg of string | `Malformed ] Alcotest.testable =
   let pp ppf = function
     | `Msg e -> Fmt.string ppf e
-    | `Expired -> Fmt.string ppf "expired"
+    | `Malformed -> Fmt.string ppf "malformed"
   in
   Alcotest.testable pp ( = )
 

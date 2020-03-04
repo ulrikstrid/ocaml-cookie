@@ -5,7 +5,7 @@ module String = struct
 end
 
 module Option = struct
-  let map_none opt value = match opt with Some _ -> opt | None -> value
+  let first_some opt value = match opt with Some _ -> opt | None -> value
 
   let flat_map fn opt = match opt with Some v -> fn v | None -> None
 

@@ -19,13 +19,8 @@ let expires_of_tuple (key, value) =
   String.lowercase_ascii key |> function
   | "max-age" -> Some (`MaxAge (Int64.of_string value))
   | "expires" ->
-      print_endline value;
       Date.parse value |> Result.get_ok |> Ptime.of_date_time
-      |> Option.map (fun e ->
-             let () =
-               Format.asprintf "expires: %a" Ptime.pp e |> print_endline
-             in
-             `Date e)
+      |> Option.map (fun e -> `Date e)
   | "session" -> Some `Session
   | _ -> None
 
@@ -47,20 +42,16 @@ let make ?(expires = `Session) ?(scope = Uri.empty) ?(same_site = `Lax)
   { expires; scope; same_site; secure; http_only; value }
 
 let of_set_cookie_header ?origin:_ ((_, value) : header) =
-  let () = print_endline ("of_set_cookie_header: " ^ value) in
-
   match Base.String.lsplit2 value ~on:';' with
   | None ->
       Util.Option.flat_map
         (fun (k, v) ->
-          print_endline (k ^ "--" ^ v);
           if String.trim k = "" then None
           else Some (make (String.trim k, String.trim v)))
         (Base.String.lsplit2 value ~on:'=')
   | Some (cookie, attrs) ->
       Util.Option.flat_map
         (fun (k, v) ->
-          print_endline (k ^ "--" ^ v);
           if k = "" then None
           else
             let value = (String.trim k, String.trim v) in
@@ -69,35 +60,49 @@ let of_set_cookie_header ?origin:_ ((_, value) : header) =
               |> List.map String.trim |> Attributes.list_to_map
             in
             let expires =
-              Attributes.AMap.find_last_opt (( = ) "max-age") attrs
-              |> Util.Option.map_none
-                   (Attributes.AMap.find_last_opt (( = ) "expires") attrs)
-              |> Util.Option.flat_map expires_of_tuple
+              Util.Option.first_some
+                ( Attributes.AMap.find_opt "expires" attrs
+                |> Option.map (fun v -> ("expires", v)) )
+                ( Attributes.AMap.find_opt "max-age" attrs
+                |> Option.map (fun v -> ("max-age", v)) )
+              |> Util.Option.flat_map (fun a -> expires_of_tuple a)
             in
             let secure = Attributes.AMap.key_exists ~key:"secure" attrs in
             let http_only = Attributes.AMap.key_exists ~key:"http_only" attrs in
             let domain : string option =
-              Attributes.AMap.find_last_opt (( = ) "domain") attrs
-              |> Option.map snd
+              Attributes.AMap.find_opt "domain" attrs
             in
-            let path : string option =
-              Attributes.AMap.find_last_opt (( = ) "path") attrs
-              |> Option.map snd
-            in
-            let scope : Uri.t =
+            let path = Attributes.AMap.find_opt "path" attrs in
+            let scope =
               Uri.empty |> fun uri ->
               Uri.with_host uri domain |> fun uri ->
-              Uri.with_path uri (Util.Option.get_default ~default:"/" path)
-            in
-
-            let () = print_endline ("cookie_scope: " ^ Uri.to_string scope) in
-            let () =
-              print_endline ("cookie value: " ^ fst value ^ "=" ^ snd value)
+              Option.map (Uri.with_path uri) path
+              |> Util.Option.get_default ~default:uri
             in
             Some (make ?expires ~scope ~secure ~http_only value))
         (Base.String.lsplit2 cookie ~on:'=')
 
-let to_set_cookie_header t = ("Set-Cookie", fst t.value ^ "=" ^ snd t.value)
+let to_set_cookie_header t =
+  let v = Printf.sprintf "%s=%s" (fst t.value) (snd t.value) in
+  let v =
+    match Uri.path t.scope with
+    | "" -> v
+    | path -> Printf.sprintf "%s; Path=%s" v path
+  in
+  let v =
+    match Uri.host t.scope with
+    | None -> v
+    | Some domain -> Printf.sprintf "%s; Domain=%s" v domain
+  in
+  let v =
+    match t.expires with
+    | `Date ptime ->
+        Printf.sprintf "%s; Expires=%s" v
+          (Ptime.to_date_time ptime |> Date.serialize)
+    | `MaxAge max -> Printf.sprintf "%s; Max-Age=%s" v (Int64.to_string max)
+    | `Session -> v
+  in
+  ("Set-Cookie", v)
 
 let is_expired ?now t =
   match now with
@@ -109,32 +114,19 @@ let is_not_expired ?now t = not (is_expired ?now t)
 
 let is_too_old ?(elapsed = Int64.of_int 0) t =
   match t.expires with
-  | `MaxAge max_age ->
-      if max_age <= elapsed then
-        let () = print_endline "too old" in
-        true
-      else false
+  | `MaxAge max_age -> if max_age <= elapsed then true else false
   | _ -> false
 
 let is_not_too_old ?(elapsed = Int64.of_int 0) t = not (is_too_old ~elapsed t)
 
 let has_matching_domain ~scope t =
-  let () =
-    Uri.host t.scope
-    |> Option.iter (fun h -> print_endline ("has_matching_domain: " ^ h))
-  in
   match (Uri.host scope, Uri.host t.scope) with
   | Some domain, Some cookie_domain ->
-      let () =
-        print_endline ("has_matching_domain: " ^ domain ^ "=" ^ cookie_domain)
-      in
       if
         String.contains cookie_domain '.'
         && ( Base.String.is_suffix domain ~suffix:cookie_domain
            || domain = cookie_domain )
-      then
-        let () = print_endline "domain matching" in
-        true
+      then true
       else false
   | _ -> true
 
@@ -143,7 +135,6 @@ let has_matching_path ~scope t =
   if cookie_path = "/" then true
   else
     let path = Uri.path scope in
-    let () = print_endline (cookie_path ^ " sub of " ^ path) in
     Base.String.is_substring_at ~pos:0 ~substring:cookie_path path
     || cookie_path = path
 
@@ -157,10 +148,6 @@ let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
     ?(scope = Uri.of_string "/") tl =
   if List.length tl = 0 then ("", "")
   else
-    let () = print_endline ("scope: " ^ Uri.to_string scope) in
-    let () =
-      print_endline ("cookies length: " ^ (List.length tl |> string_of_int))
-    in
     let idx = ref 0 in
     let cookie_map : string CookieMap.t =
       tl
@@ -173,15 +160,7 @@ let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
              idx := !idx + 1;
              let key, _value = c.value in
 
-             CookieMap.update (!idx, key)
-               (fun v ->
-                 let () =
-                   if Base.Option.is_some v then
-                     print_endline (key ^ " replaced")
-                   else print_endline (key ^ " not replaced")
-                 in
-                 Some c)
-               m)
+             CookieMap.update (!idx, key) (fun _ -> Some c) m)
            CookieMap.empty
       |> CookieMap.filter_value (is_not_too_old ~elapsed)
       |> CookieMap.map (fun c -> snd c.value)
@@ -195,10 +174,7 @@ let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
           cookie_map []
         |> List.rev
         |> List.map (fun (key, value) -> Printf.sprintf "%s=%s" key value)
-        |> String.concat "; "
-        |> fun s ->
-        print_endline ("cookie: " ^ s);
-        s )
+        |> String.concat "; " )
 
 let cookie_of_cookie_header (_, value) =
   match String.split_on_char '=' value with

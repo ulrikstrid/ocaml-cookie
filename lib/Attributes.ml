@@ -40,18 +40,14 @@ let set_attributes amap attr =
         |> Util.String.chop_prefix ~prefix:"."
         |> String.lowercase_ascii
       in
-      let () = print_endline ("attr domain: " ^ domain) in
       if
         domain = ""
         || Base.String.is_suffix domain ~suffix:"."
         || Base.String.is_prefix domain ~prefix:"."
-      then
-        let () = print_endline "skipping domain" in
-        amap
+      then amap
       else AMap.update "domain" (force_set domain) amap
   | key :: value when String.lowercase_ascii key |> String.trim = "expires" ->
       let expires = String.concat "" value |> String.trim in
-      let () = print_endline expires in
       AMap.update "expires" (force_set expires) amap
   | [ key; value ] when String.lowercase_ascii key = "max-age" ->
       AMap.update "max-age" (force_set (keep_numbers value)) amap

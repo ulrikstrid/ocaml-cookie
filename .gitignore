@@ -3,5 +3,7 @@ node_modules
 
 _coverage
 junit.xml
+coverage.json
 
 .DS_Store
+*/.merlin

@@ -27,7 +27,7 @@ let month_of_int = function
   | 8 -> "Aug"
   | 9 -> "Sep"
   | 10 -> "Oct"
-  | 11 -> "Mov"
+  | 11 -> "Nov"
   | 12 -> "Dec"
   | _ -> "Jan"
 
