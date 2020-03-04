@@ -21,7 +21,6 @@ let expires_of_tuple (key, value) =
   | "expires" ->
       Date.parse value |> Result.get_ok |> Ptime.of_date_time
       |> Option.map (fun e -> `Date e)
-  | "session" -> Some `Session
   | _ -> None
 
 type same_site = [ `None | `Strict | `Lax ]
@@ -102,6 +101,8 @@ let to_set_cookie_header t =
     | `MaxAge max -> Printf.sprintf "%s; Max-Age=%s" v (Int64.to_string max)
     | `Session -> v
   in
+  let v = if t.secure then Printf.sprintf "%s; Secure" v else v in
+  let v = if t.http_only then Printf.sprintf "%s; HttpOnly" v else v in
   ("Set-Cookie", v)
 
 let is_expired ?now t =
@@ -175,8 +176,3 @@ let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
         |> List.rev
         |> List.map (fun (key, value) -> Printf.sprintf "%s=%s" key value)
         |> String.concat "; " )
-
-let cookie_of_cookie_header (_, value) =
-  match String.split_on_char '=' value with
-  | key :: value -> (key, String.concat "" value)
-  | _ -> raise Not_found
