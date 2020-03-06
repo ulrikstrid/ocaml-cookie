@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages and publish npm
 on:
   push:
     branches:
@@ -51,3 +51,33 @@ jobs:
           BRANCH: gh-pages
           CLEAN: true
           FOLDER: ${{ steps.print_docs_path.outputs.docs_path }}
+  publish-to-npm:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+        registry-url: https://registry.npmjs.org/
+    - name: Publish packages
+      run: |
+        set -e
+        extract() {
+          # Field's key/value should be on their own line
+          echo $(cat package.json \
+            | grep "$1" \
+            | head -1 \
+            | awk -F: '{ print $2 }' \
+            | sed 's/[",]//g')
+        }
+        PACKAGE_NAME=$(extract name)
+        PACKAGE_VERSION=$(extract version)
+        NPM_VERSION=$(npm view "$PACKAGE_NAME" version)
+          
+        if [ "$NPM_VERSION" != "$PACKAGE_VERSION" ]
+        then
+          npm publish --access public
+        fi
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} 
