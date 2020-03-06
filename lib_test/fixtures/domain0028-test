@@ -1,2 +1,0 @@
-Set-Cookie: foo=bar; domain=subdomain.home.example.org
-Location: http://changed_by_ulrik.home.example.org:8888/cookie-parser?domain0028

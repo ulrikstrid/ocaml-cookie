@@ -1,3 +1,0 @@
-Set-Cookie: foo=bar; path=/cookie-parser
-Set-Cookie: foo2=qux; path=/cookie-parser/
-Location: /cookie-parser/dog?path0032
