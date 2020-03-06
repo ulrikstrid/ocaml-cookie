@@ -21,7 +21,7 @@ jobs:
         id: print_esy_cache
         run: node .github/workflows/print_esy_cache.js
       - name: Try to restore dependencies cache
-        id: deps-cache-macos
+        id: deps-cache
         uses: actions/cache@v1
         with:
           path: ${{ steps.print_esy_cache.outputs.esy_cache }}
