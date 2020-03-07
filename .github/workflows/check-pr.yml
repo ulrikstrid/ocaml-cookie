@@ -38,6 +38,3 @@ jobs:
     - name: Check code formatting
       run: esy dune build @fmt --root .
       if: matrix.os != 'windows-latest'
-
-    - name: Test
-      run: esy test

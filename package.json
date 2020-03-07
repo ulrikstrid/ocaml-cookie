@@ -12,7 +12,7 @@
     "install": "esy-installer #{self.target_dir / 'default' / self.name '.install'}"
   },
   "scripts": {
-    "test": "dune runtest --no-buffer",
+    "test": "dune runtest --no-buffer --force",
     "test:watch": "dune runtest --no-buffer --watch",
     "fmt": "dune build @fmt --auto-promote --root .",
     "docs": "dune build @doc --root .",
