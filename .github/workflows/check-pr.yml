@@ -10,11 +10,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
     - uses: actions/setup-node@v1
       with:
-        node-version: 12'
+        node-version: 12
     - uses: actions/checkout@v1
     - name: Install esy
       run: npm install -g esy@0.6.2
@@ -37,6 +37,4 @@ jobs:
 
     - name: Check code formatting
       run: esy dune build @fmt --root .
-
-    - name: Test
-      run: esy test
+      if: matrix.os != 'windows-latest'
