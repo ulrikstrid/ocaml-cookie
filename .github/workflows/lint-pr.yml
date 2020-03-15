@@ -61,10 +61,9 @@ jobs:
       - name: Display status should be clean
         run: git status
         if: success()
-      - uses: actions/github-script@0.3.0
+      - uses: actions/github-script@0.8.0
         if: failure()
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,

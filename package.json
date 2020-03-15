@@ -17,6 +17,7 @@
   "scripts": {
     "test": "dune runtest --no-buffer --force",
     "test:watch": "dune runtest --no-buffer --watch",
+    "bench": "dune exec lib_bench/main.exe",
     "fmt": "dune build @fmt --auto-promote --root .",
     "docs": "dune build @doc --root .",
     "docs:open": "open #{self.target_dir / 'default' / '_doc' / '_html' / 'index.html'}",
@@ -34,6 +35,7 @@
     "ocaml": "~4.9.0",
     "@opam/alcotest": "*",
     "@opam/bisect_ppx": "aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca",
+    "@opam/core_bench": "*",
     "@opam/merlin": "*",
     "@opam/ocamlformat": "*",
     "@opam/odoc": "*",
