@@ -4,8 +4,10 @@ open Helpers
 let test_names =
   Sys.readdir "./fixtures" |> Array.to_list
   |> List.filter (fun file ->
-         not (Base.String.is_substring_at ~pos:0 ~substring:"disabled" file))
-  |> List.filter_map (Base.String.chop_suffix ~suffix:"-test")
+         not (Astring.String.is_prefix ~affix:"disabled" file))
+  |> List.filter (Astring.String.is_suffix ~affix:"-test")
+  |> List.map (fun str ->
+         Astring.String.take ~rev:false str ~max:(Astring.String.length str - 5))
   |> List.sort String.compare
 
 let file_to_lines file_path =
@@ -26,6 +28,8 @@ let test_header_of_string str =
   then Some ("Location", String.sub str 10 (len - 10))
   else Cookie.header_of_string str
 
+let hd_safe ~default l = try List.hd l with Failure _ -> default
+
 let tests =
   ( "Fixtures",
     test_names
@@ -34,8 +38,7 @@ let tests =
                let expected =
                  file_to_lines ("./fixtures/" ^ name ^ "-expected")
                  |> List.filter_map Cookie.header_of_string
-                 |> Base.List.hd
-                 |> Base.Option.value ~default:("", "")
+                 |> hd_safe ~default:("", "")
                in
                let test_headers =
                  file_to_lines ("./fixtures/" ^ name ^ "-test")
@@ -48,8 +51,7 @@ let tests =
                      if key = "Location" then Some (Uri.of_string value)
                      else None)
                    test_headers
-                 |> Base.List.hd
-                 |> Base.Option.value
+                 |> hd_safe
                       ~default:
                         (Uri.of_string
                            ("http://home.example.org:8888/cookie-parser?" ^ name))

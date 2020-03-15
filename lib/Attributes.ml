@@ -7,8 +7,8 @@ end
 let force_set v _ = Some v
 
 let keep_numbers s =
-  Base.String.filter
-    ~f:(fun c ->
+  Astring.String.filter
+    (fun c ->
       let code = Char.code c in
       if code = 45 || (code >= 48 && code <= 57) then true else false)
     s
@@ -32,18 +32,18 @@ let set_attributes amap attr =
       AMap.update "path"
         (force_set
            ( String.concat "" value |> String.trim
-           |> Base.String.filter ~f:is_valid_char ))
+           |> Astring.String.filter is_valid_char ))
         amap
   | key :: value when String.lowercase_ascii key |> String.trim = "domain" ->
       let domain =
         value |> String.concat "" |> String.trim
-        |> Util.String.chop_prefix ~prefix:"."
+        |> Astring.String.drop ~max:1 ~sat:(( = ) '.')
         |> String.lowercase_ascii
       in
       if
         domain = ""
-        || Base.String.is_suffix domain ~suffix:"."
-        || Base.String.is_prefix domain ~prefix:"."
+        || Astring.String.is_suffix domain ~affix:"."
+        || Astring.String.is_prefix domain ~affix:"."
       then amap
       else AMap.update "domain" (force_set domain) amap
   | key :: value when String.lowercase_ascii key |> String.trim = "expires" ->

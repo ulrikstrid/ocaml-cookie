@@ -15,7 +15,7 @@
 (name cookie)
 (depends
    (ocaml (>= 4.06.0))
-   (base :with-test)
+   astring
    (bisect_ppx :with-test)
    (alcotest :with-test)
    (junit :with-test)
@@ -29,7 +29,6 @@
    (ocaml (>= 4.06.0))
    cookie
    session
-   (base :with-test)
    (bisect_ppx :with-test)
    (alcotest :with-test)
    (junit :with-test)
@@ -43,7 +42,6 @@
    (ocaml (>= 4.06.0))
    session-cookie
    async
-   (base :with-test)
    (bisect_ppx :with-test)
    (alcotest :with-test)
    (junit :with-test)
@@ -57,7 +55,6 @@
    (ocaml (>= 4.06.0))
    session-cookie
    lwt
-   (base :with-test)
    (bisect_ppx :with-test)
    (alcotest :with-test)
    (junit :with-test)

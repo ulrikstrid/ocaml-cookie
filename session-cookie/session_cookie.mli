@@ -32,10 +32,11 @@
   ----------------------------------------------------------------------------*)
 
 (** The signature for a cookie-compatible backend. *)
-module type Backend = Session.S.Future
-  with type key = string
-   and type value = string
-   and type period = int64
+module type Backend =
+  Session.S.Future
+    with type key = string
+     and type value = string
+     and type period = int64
 
 (** The signature for a cookie session manager. *)
 module type S = sig
@@ -54,12 +55,15 @@ module type S = sig
   type period
   (** The type of a session expiry period. *)
 
-  type t = private
-    { key : key  (** They key for the session in the backend and in cookies. *)
-    ; mutable value : value (** The value for the session stored in the backend. *)
-    ; mutable expiry_period : period (** The period from now in seconds that the session will expire. *)
-    ; mutable modified : bool (** Whether the session data or expiry have been modified *)
-    }
+  type t = private {
+    key : key;  (** They key for the session in the backend and in cookies. *)
+    mutable value : value;
+        (** The value for the session stored in the backend. *)
+    mutable expiry_period : period;
+        (** The period from now in seconds that the session will expire. *)
+    mutable modified : bool;
+        (** Whether the session data or expiry have been modified *)
+  }
   (** The session type.
 
       This type is marked private, so the record fields can be accessed and
@@ -74,7 +78,8 @@ module type S = sig
   (** [of_key backend key] fetches the session associated with [key] from the
       backend, if present and unexpired. *)
 
-  val of_header : backend -> string -> Cookie.header -> (t option, Session.S.error) result io
+  val of_header :
+    backend -> string -> Cookie.header -> (t option, Session.S.error) result io
   (** [of_header backend cookie_key header] retrieves the session key from
       the cookies in [header]. If [cookie_key] is not present in any cookies in
       [header], then this function will return [None]. If a session key is
@@ -82,7 +87,8 @@ module type S = sig
       successful, then this function will return [Some session]. If no key was
       found in [header], it will return [None]. *)
 
-  val of_header_or_create : ?expiry:period -> backend -> string -> value -> Cookie.header -> t io
+  val of_header_or_create :
+    ?expiry:period -> backend -> string -> value -> Cookie.header -> t io
   (** [of_header_or_create ?expiry backend cookie_key default header] retrieves
       the session key from the cookies in [header]. If [cookie_key] is not
       present in any cookies in the [header] or if the session is not a valid
@@ -90,17 +96,21 @@ module type S = sig
       [default] as the value. *)
 
   val to_cookie_hdrs :
-    ?discard:bool -> ?path:string -> ?domain:string ->
-    ?secure:bool -> ?http_only:bool ->
-    string -> t -> (string * string) list
+    ?discard:bool ->
+    ?path:string ->
+    ?domain:string ->
+    ?secure:bool ->
+    ?http_only:bool ->
+    string ->
+    t ->
+    (string * string) list
   (** [to_cookie_hdrs cookie_key session] will generate response
       headers to communicate session changes to the client. This function takes
       into account the {!field:t.modified} field of the {{!type:t}session}
       type, and will not generate headers if they are not needed. *)
 
   val clear_hdrs :
-    ?path:string -> ?domain:string ->
-    string -> (string * string) list
+    ?path:string -> ?domain:string -> string -> (string * string) list
   (** [clear_hdrs cookie_key] will generate response headers to
       communicate that the client should evict the session with key
       [cookie_key]. *)
@@ -130,9 +140,10 @@ module type S = sig
 end
 
 (** Create a cookie session manager given an appropriate backend. *)
-module Make(IO:Session.S.IO)(B:Backend with type +'a io = 'a IO.t) : S
-  with type +'a io = 'a B.io
-   and type backend = B.t
-   and type key = B.key
-   and type value = B.value
-   and type period = B.period
+module Make (IO : Session.S.IO) (B : Backend with type +'a io = 'a IO.t) :
+  S
+    with type +'a io = 'a B.io
+     and type backend = B.t
+     and type key = B.key
+     and type value = B.value
+     and type period = B.period

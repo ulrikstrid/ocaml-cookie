@@ -20,7 +20,7 @@
     "docs:path": "esy echo #{self.target_dir / 'default' / '_doc' / '_html'}"
   },
   "dependencies": {
-    "@opam/base": "*",
+    "@opam/astring": "^0.8.3",
     "@opam/dune": ">=1.5.0",
     "@opam/ptime": "0.8.5",
     "@opam/uri": "3.1.0",

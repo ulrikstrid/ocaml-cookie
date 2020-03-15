@@ -41,13 +41,13 @@ let make ?(expires = `Session) ?(scope = Uri.empty) ?(same_site = `Lax)
   { expires; scope; same_site; secure; http_only; value }
 
 let of_set_cookie_header ?origin:_ ((_, value) : header) =
-  match Base.String.lsplit2 value ~on:';' with
+  match Astring.String.cut ~sep:";" value with
   | None ->
       Util.Option.flat_map
         (fun (k, v) ->
           if String.trim k = "" then None
           else Some (make (String.trim k, String.trim v)))
-        (Base.String.lsplit2 value ~on:'=')
+        (Astring.String.cut value ~sep:"=")
   | Some (cookie, attrs) ->
       Util.Option.flat_map
         (fun (k, v) ->
@@ -79,7 +79,7 @@ let of_set_cookie_header ?origin:_ ((_, value) : header) =
               |> Util.Option.get_default ~default:uri
             in
             Some (make ?expires ~scope ~secure ~http_only value))
-        (Base.String.lsplit2 cookie ~on:'=')
+        (Astring.String.cut cookie ~sep:"=")
 
 let to_set_cookie_header t =
   let v = Printf.sprintf "%s=%s" (fst t.value) (snd t.value) in
@@ -125,7 +125,7 @@ let has_matching_domain ~scope t =
   | Some domain, Some cookie_domain ->
       if
         String.contains cookie_domain '.'
-        && ( Base.String.is_suffix domain ~suffix:cookie_domain
+        && ( Astring.String.is_suffix domain ~affix:cookie_domain
            || domain = cookie_domain )
       then true
       else false
@@ -136,8 +136,7 @@ let has_matching_path ~scope t =
   if cookie_path = "/" then true
   else
     let path = Uri.path scope in
-    Base.String.is_substring_at ~pos:0 ~substring:cookie_path path
-    || cookie_path = path
+    Astring.String.is_prefix ~affix:cookie_path path || cookie_path = path
 
 let is_secure ~scope t =
   match Uri.scheme scope with

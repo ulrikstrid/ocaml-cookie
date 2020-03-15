@@ -1,5 +1,5 @@
 {
-  "checksum": "2eba5b46d083c6e39ba3e8410da162db",
+  "checksum": "2fde876fd1729266cbd8daade1971543",
   "root": "@reason-native-web/cookie_dev@link-dev:./package.json",
   "node": {
     "ocaml@4.9.0@d41d8cd9": {
@@ -46,7 +46,7 @@
         "ocaml@4.9.0@d41d8cd9", "@opam/uri@opam:3.1.0@d38ac0ae",
         "@opam/session@opam:0.4.1@94442a02",
         "@opam/ptime@opam:0.8.5@0051d642", "@opam/dune@opam:2.4.0@639d28a3",
-        "@opam/base@opam:v0.13.1@7d937ed0"
+        "@opam/astring@opam:0.8.3@4e5e17d5"
       ],
       "devDependencies": [
         "ocaml@4.9.0@d41d8cd9", "@opam/odoc@opam:1.5.0@35218f5f",
@@ -54,7 +54,7 @@
         "@opam/merlin@opam:3.3.3@d653b06a", "@opam/lwt@opam:5.2.0@31d36dc2",
         "@opam/junit_alcotest@opam:2.0.2@6922b233",
         "@opam/junit@opam:2.0.2@0b7bd730",
-        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365@d41d8cd9",
+        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9",
         "@opam/async@opam:v0.13.0@c4b28450",
         "@opam/alcotest@opam:1.0.1@412cd081"
       ]
@@ -2916,16 +2916,16 @@
       ],
       "devDependencies": [ "ocaml@4.9.0@d41d8cd9" ]
     },
-    "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365@d41d8cd9": {
+    "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9": {
       "id":
-        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365@d41d8cd9",
+        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9",
       "name": "@opam/bisect_ppx",
       "version":
-        "github:aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365",
+        "github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca",
       "source": {
         "type": "install",
         "source": [
-          "github:aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365"
+          "github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca"
         ]
       },
       "overrides": [],

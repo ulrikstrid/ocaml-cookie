@@ -43,30 +43,43 @@ module type S = sig
   type backend
 
   type key
+
   type value
+
   type period
 
-  type t = private
-    { key : key
-    ; mutable value : value
-    ; mutable expiry_period : period
-    ; mutable modified : bool
-    }
+  type t = private {
+    key : key;
+    mutable value : value;
+    mutable expiry_period : period;
+    mutable modified : bool;
+  }
 
   val of_key : backend -> key -> (t, Session.S.error) result io
-  val of_header : backend -> string -> Cookie.header -> (t option, Session.S.error) result io
-  val of_header_or_create : ?expiry:period -> backend -> string -> value -> Cookie.header -> t io
+
+  val of_header :
+    backend -> string -> Cookie.header -> (t option, Session.S.error) result io
+
+  val of_header_or_create :
+    ?expiry:period -> backend -> string -> value -> Cookie.header -> t io
+
   val to_cookie_hdrs :
-    ?discard:bool -> ?path:string -> ?domain:string ->
-    ?secure:bool -> ?http_only:bool ->
-    string -> t -> (string * string) list
+    ?discard:bool ->
+    ?path:string ->
+    ?domain:string ->
+    ?secure:bool ->
+    ?http_only:bool ->
+    string ->
+    t ->
+    (string * string) list
 
   val clear_hdrs :
-    ?path:string -> ?domain:string ->
-    string -> (string * string) list
+    ?path:string -> ?domain:string -> string -> (string * string) list
 
   val generate : ?expiry:period -> backend -> value -> t io
+
   val clear : backend -> t -> unit io
+
   val set : ?expiry:period -> ?value:value -> backend -> t -> unit io
 end
 

@@ -6,7 +6,7 @@ echo patching dune file
 gsed -i '$i \(preprocess (pps bisect_ppx))\' lib/dune
 
 echo running tests
-BISECT_ENABLE=yes REPORT_PATH=./junit.xml esy test --force
+BISECT_ENABLE=yes REPORT_PATH=./junit.xml esy test
 
 esy echo "#{self.target_dir / 'default' / 'lib_test'}"
 

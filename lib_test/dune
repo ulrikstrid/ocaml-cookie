@@ -3,7 +3,7 @@
 (data_only_dirs fixtures)
 
 (test
- (libraries cookie alcotest junit junit_alcotest base)
+ (libraries cookie alcotest junit junit_alcotest)
  (modules :standard)
  (deps
   (glob_files fixtures/*))
