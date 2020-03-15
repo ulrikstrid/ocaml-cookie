@@ -1,15 +1,18 @@
 {
-  "version": "0.1.0",
-  "name": "@reason-native-web/cookie",
+  "version": "0.1.4",
+  "name": "@reason-native-web/cookie_dev",
   "license": "BSD-3-clause",
   "homepage": "https://github.com/reason-native-web/ocaml-cookie",
   "bugs": {
     "url": "https://github.com/reason-native-web/ocaml-cookie/issues"
   },
   "esy": {
-    "build": "dune build --only-packages=cookie --root=. --profile=release -j 4",
+    "build": "dune build --root=. @default @runtest --no-buffer -j 4",
     "buildDev": "dune build --root=. @default @runtest --no-buffer",
-    "install": "esy-installer #{self.target_dir / 'default' / self.name '.install'}"
+    "install": [
+      "esy-installer #{self.target_dir / 'default' / 'cookie.install'}",
+      "esy-installer #{self.target_dir / 'default' / 'session-cookie.install'}"
+    ]
   },
   "scripts": {
     "test": "dune runtest --no-buffer --force",
@@ -20,20 +23,23 @@
     "docs:path": "esy echo #{self.target_dir / 'default' / '_doc' / '_html'}"
   },
   "dependencies": {
+    "@opam/base": "*",
     "@opam/dune": ">=1.5.0",
     "@opam/ptime": "0.8.5",
+    "@opam/session": "^0.4.1",
     "@opam/uri": "3.1.0",
     "ocaml": ">=4.6.0"
   },
   "devDependencies": {
     "ocaml": "~4.9.0",
-    "@opam/base": "*",
     "@opam/alcotest": "*",
     "@opam/bisect_ppx": "aantron/bisect_ppx:bisect_ppx.opam#61399f61ea830425adaca039eb827447258f1365",
     "@opam/merlin": "*",
     "@opam/ocamlformat": "*",
     "@opam/odoc": "*",
     "@opam/junit": "*",
-    "@opam/junit_alcotest": "*"
+    "@opam/junit_alcotest": "*",
+    "@opam/lwt": "*",
+    "@opam/async": "*"
   }
 }

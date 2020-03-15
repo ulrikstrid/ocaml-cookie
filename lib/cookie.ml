@@ -113,12 +113,12 @@ let is_expired ?now t =
 
 let is_not_expired ?now t = not (is_expired ?now t)
 
-let is_too_old ?(elapsed = Int64.of_int 0) t =
+let is_too_old ?(elapsed = 0L) t =
   match t.expires with
   | `MaxAge max_age -> if max_age <= elapsed then true else false
   | _ -> false
 
-let is_not_too_old ?(elapsed = Int64.of_int 0) t = not (is_too_old ~elapsed t)
+let is_not_too_old ?(elapsed = 0L) t = not (is_too_old ~elapsed t)
 
 let has_matching_domain ~scope t =
   match (Uri.host scope, Uri.host t.scope) with
@@ -145,8 +145,7 @@ let is_secure ~scope t =
   | Some "https" -> true
   | _ -> not t.secure
 
-let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
-    ?(scope = Uri.of_string "/") tl =
+let to_cookie_header ?now ?(elapsed = 0L) ?(scope = Uri.of_string "/") tl =
   if List.length tl = 0 then ("", "")
   else
     let idx = ref 0 in
@@ -176,3 +175,13 @@ let to_cookie_header ?now ?(elapsed = Int64.of_int 0)
         |> List.rev
         |> List.map (fun (key, value) -> Printf.sprintf "%s=%s" key value)
         |> String.concat "; " )
+
+let cookies_of_header (key, value) =
+  match key with
+  | "Cookie" | "cookie" ->
+      String.split_on_char ';' value
+      |> List.map (String.split_on_char '=')
+      |> List.filter_map (function
+           | [ key; value ] -> Some (key, value)
+           | _ -> None)
+  | _ -> []

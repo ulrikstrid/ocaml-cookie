@@ -1,0 +1,4 @@
+(library
+ (name session_cookie_lwt)
+ (public_name session-cookie-lwt)
+ (libraries lwt result session-cookie))

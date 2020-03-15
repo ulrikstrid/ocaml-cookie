@@ -1,0 +1,4 @@
+(library
+ (name session_cookie)
+ (public_name session-cookie)
+ (libraries session cookie))

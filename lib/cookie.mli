@@ -47,6 +47,8 @@ val to_set_cookie_header : t -> header
 val to_cookie_header :
   ?now:Ptime.t -> ?elapsed:int64 -> ?scope:Uri.t -> t list -> header
 
+val cookies_of_header : header -> cookie list
+
 module Date : sig
   type date_time = Ptime.date * Ptime.time
 

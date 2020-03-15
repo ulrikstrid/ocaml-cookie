@@ -22,3 +22,45 @@
    (junit_alcotest :with-test)
 )
 )
+
+(package
+(name session-cookie)
+(depends
+   (ocaml (>= 4.06.0))
+   cookie
+   session
+   (base :with-test)
+   (bisect_ppx :with-test)
+   (alcotest :with-test)
+   (junit :with-test)
+   (junit_alcotest :with-test)
+)
+)
+
+(package
+(name session-cookie-async)
+(depends
+   (ocaml (>= 4.06.0))
+   session-cookie
+   async
+   (base :with-test)
+   (bisect_ppx :with-test)
+   (alcotest :with-test)
+   (junit :with-test)
+   (junit_alcotest :with-test)
+)
+)
+
+(package
+(name session-cookie-lwt)
+(depends
+   (ocaml (>= 4.06.0))
+   session-cookie
+   lwt
+   (base :with-test)
+   (bisect_ppx :with-test)
+   (alcotest :with-test)
+   (junit :with-test)
+   (junit_alcotest :with-test)
+)
+)

@@ -1,0 +1,4 @@
+(library
+ (name session_cookie_async)
+ (public_name session-cookie-async)
+ (libraries async result session-cookie threads))

@@ -7,3 +7,7 @@ coverage.json
 
 .DS_Store
 */.merlin
+*.esy.lock
+*.install
+
+*/esy.lock

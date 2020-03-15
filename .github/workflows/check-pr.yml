@@ -17,11 +17,9 @@ jobs:
         node-version: 12
     - uses: actions/checkout@v1
     - name: Install esy
-      run: npm install -g esy@0.6.2
-
+      run: npm install -g esy
     - name: Install dependencies
       run: esy install
-
     - name: Print esy cache
       id: print_esy_cache
       run: node .github/workflows/print_esy_cache.js
@@ -30,11 +28,8 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ${{ steps.print_esy_cache.outputs.esy_cache }}
-        key: ${{ matrix.os }}-4.09-${{ hashFiles('**/index.json') }}
-
+        key: ${{ matrix.os }}-${{ hashFiles('**/index.json') }}
     - name: Build
       run: esy build
-
-    - name: Check code formatting
-      run: esy dune build @fmt --root .
-      if: matrix.os != 'windows-latest'
+    - name: Test
+      run: esy test

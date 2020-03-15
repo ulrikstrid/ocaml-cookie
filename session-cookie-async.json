@@ -1,0 +1,22 @@
+{
+  "version": "0.1.4",
+  "name": "@reason-native-web/session-cookie-async",
+  "license": "BSD-3-clause",
+  "homepage": "https://github.com/reason-native-web/ocaml-cookie",
+  "bugs": {
+    "url": "https://github.com/reason-native-web/ocaml-cookie/issues"
+  },
+  "esy": {
+    "build": "dune build --only-packages=session-cookie-async --root=. --profile=release -j 4",
+    "install": "esy-installer #{self.target_dir / 'default' / 'session-cookie-async.install'}"
+  },
+  "dependencies": {
+    "@reason-native-web/session-cookie": "^0.1.4",
+    "@opam/async": "*",
+    "ocaml": ">=4.6.0"
+  },
+  "devDependencies": {
+    "ocaml": "~4.9.0",
+    "@opam/merlin": "*"
+  }
+}
