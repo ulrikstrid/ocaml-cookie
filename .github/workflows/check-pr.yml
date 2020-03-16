@@ -39,23 +39,18 @@ jobs:
       with:
         result-encoding: string
         script: |
-          const Cp = context.require("child_process");
+          const Cp = require("child_process");
 
-          const benchmark = Cp.execSync("esy bench").toString();
+          Cp.execSync("esy @benchmark");
+          const benchmark = Cp.execSync(`esy @benchmark "#{self.target_dir / 'default' / 'lib_bench' / 'main.exe' }"`);
           
           console.log(benchmark);
           
-          if (
-            github != null &&
-            github.issues != null &&
-            github.issues.createComment != null
-          ) {
-            github.issues.createComment({
+          github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `Benchmark for this PR is:
           
-          ${benchmark}`
-            });
-          }'
+            ${benchmark}`
+          });

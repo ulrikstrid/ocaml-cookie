@@ -1,5 +1,5 @@
 {
-  "checksum": "00bf4d1f9dbd100fd3fe545998ae5c1c",
+  "checksum": "2fde876fd1729266cbd8daade1971543",
   "root": "@reason-native-web/cookie_dev@link-dev:./package.json",
   "node": {
     "ocaml@4.9.0@d41d8cd9": {
@@ -54,7 +54,6 @@
         "@opam/merlin@opam:3.3.3@d653b06a", "@opam/lwt@opam:5.2.0@31d36dc2",
         "@opam/junit_alcotest@opam:2.0.2@6922b233",
         "@opam/junit@opam:2.0.2@0b7bd730",
-        "@opam/core_bench@opam:v0.13.0@bbd1ebad",
         "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9",
         "@opam/async@opam:v0.13.0@c4b28450",
         "@opam/alcotest@opam:1.0.1@412cd081"
@@ -2797,41 +2796,6 @@
         "@opam/base_quickcheck@opam:v0.13.0@5af3a4c1",
         "@opam/base_bigstring@opam:v0.13.0@0ff1bf89",
         "@opam/base@opam:v0.13.1@7d937ed0"
-      ]
-    },
-    "@opam/core_bench@opam:v0.13.0@bbd1ebad": {
-      "id": "@opam/core_bench@opam:v0.13.0@bbd1ebad",
-      "name": "@opam/core_bench",
-      "version": "opam:v0.13.0",
-      "source": {
-        "type": "install",
-        "source": [
-          "archive:https://opam.ocaml.org/cache/md5/31/310d25daf8849865cb65d350f001636a#md5:310d25daf8849865cb65d350f001636a",
-          "archive:https://ocaml.janestreet.com/ocaml-core/v0.13/files/core_bench-v0.13.0.tar.gz#md5:310d25daf8849865cb65d350f001636a"
-        ],
-        "opam": {
-          "name": "core_bench",
-          "version": "v0.13.0",
-          "path": "esy.lock/opam/core_bench.v0.13.0"
-        }
-      },
-      "overrides": [],
-      "dependencies": [
-        "ocaml@4.9.0@d41d8cd9", "@opam/textutils@opam:v0.13.0@baf6f036",
-        "@opam/re@opam:1.9.0@d4d5e13d",
-        "@opam/ppx_jane@opam:v0.13.0@f4d30f53",
-        "@opam/dune@opam:2.4.0@639d28a3",
-        "@opam/core_kernel@opam:v0.13.1@834fa417",
-        "@opam/core@opam:v0.13.0@d9487021",
-        "@esy-ocaml/substs@0.0.1@d41d8cd9"
-      ],
-      "devDependencies": [
-        "ocaml@4.9.0@d41d8cd9", "@opam/textutils@opam:v0.13.0@baf6f036",
-        "@opam/re@opam:1.9.0@d4d5e13d",
-        "@opam/ppx_jane@opam:v0.13.0@f4d30f53",
-        "@opam/dune@opam:2.4.0@639d28a3",
-        "@opam/core_kernel@opam:v0.13.1@834fa417",
-        "@opam/core@opam:v0.13.0@d9487021"
       ]
     },
     "@opam/core@opam:v0.13.0@d9487021": {

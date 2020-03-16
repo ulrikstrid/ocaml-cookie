@@ -40,7 +40,7 @@ jobs:
       - name: format sources files
         run: |
           esy fmt
-          git add "*.re" "*.rei" "*.ml" "*.mli"
+          git add "*.ml" "*.mli"
       - name: Update version in packages
         run: |
           node .github/workflows/update_package_version.js
