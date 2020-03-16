@@ -33,3 +33,25 @@ jobs:
       run: esy build
     - name: Test
       run: esy test
+    - name: Benchmark
+      if: matrix.os == 'macos-latest'
+      uses: actions/github-script@0.8.0
+      with:
+        result-encoding: string
+        script: |
+          const Cp = require("child_process");
+
+          Cp.execSync("esy @benchmark");
+          const benchmark = Cp.execSync(`esy @benchmark "#{self.target_dir / 'default' / 'lib_bench' / 'main.exe' }"`);
+          
+          console.log(benchmark);
+          
+          github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Benchmark for this PR is:
+            \`\`\`
+            ${benchmark}
+            \`\`\``
+          });

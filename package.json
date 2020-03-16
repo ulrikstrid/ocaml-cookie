@@ -7,8 +7,7 @@
     "url": "https://github.com/reason-native-web/ocaml-cookie/issues"
   },
   "esy": {
-    "build": "dune build --root=. @default @runtest --no-buffer -j 4",
-    "buildDev": "dune build --root=. @default @runtest --no-buffer",
+    "build": "dune build --only-packages=cookie,session-cookie,session-cookie-async,session-cookie-lwt --root=. @default @runtest --no-buffer -j 4",
     "install": [
       "esy-installer #{self.target_dir / 'default' / 'cookie.install'}",
       "esy-installer #{self.target_dir / 'default' / 'session-cookie.install'}"
@@ -17,6 +16,7 @@
   "scripts": {
     "test": "dune runtest --no-buffer --force",
     "test:watch": "dune runtest --no-buffer --watch",
+    "bench": "dune exec lib_bench/main.exe",
     "fmt": "dune build @fmt --auto-promote --root .",
     "docs": "dune build @doc --root .",
     "docs:open": "open #{self.target_dir / 'default' / '_doc' / '_html' / 'index.html'}",

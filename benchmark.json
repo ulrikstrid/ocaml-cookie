@@ -1,0 +1,16 @@
+{
+  "name": "cookie-benchmark",
+  "version": "1.0.0",
+  "esy": {
+    "build": "dune build --profile=release lib_bench/main.exe"
+  },
+  "dependencies": {
+    "ocaml": "4.09.0",
+    "dune": "*",
+    "@opam/core_bench": "*",
+    "cookie": "*"
+  },
+  "resolutions": {
+    "cookie": "link:./lib.json"
+  }
+}

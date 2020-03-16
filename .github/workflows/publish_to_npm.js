@@ -111,7 +111,8 @@ const packages = fs
     file =>
       file.includes(".json") &&
       !file.includes("package") &&
-      !file.includes("esy")
+      !file.includes("esy") &&
+      !file.includes("benchmark")
   )
   .map(file => file.replace(".json", ""));
 
