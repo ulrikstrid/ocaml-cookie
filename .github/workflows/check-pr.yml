@@ -42,7 +42,7 @@ jobs:
           const Cp = require("child_process");
 
           Cp.execSync("esy @benchmark");
-          const benchmark = Cp.execSync(`esy @benchmark "#{self.target_dir / 'default' / 'lib_bench' / 'main.exe' }" -ascii`);
+          const benchmark = Cp.execSync(`esy @benchmark "#{self.target_dir / 'default' / 'lib_bench' / 'main.exe' }"`);
           
           console.log(benchmark);
           
@@ -51,6 +51,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `Benchmark for this PR is:
-          
-            ${benchmark}`
+            \`\`\`
+            ${benchmark}
+            \`\`\``
           });
