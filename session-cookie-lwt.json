@@ -13,7 +13,7 @@
   "dependencies": {
     "@reason-native-web/session-cookie": "^0.1.4",
     "@opam/lwt": "*",
-    "ocaml": ">=4.6.0"
+    "ocaml": ">=4.8.0"
   },
   "devDependencies": {
     "ocaml": "~4.9.0",

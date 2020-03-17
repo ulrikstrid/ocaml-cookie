@@ -28,7 +28,7 @@
     "@opam/ptime": "0.8.5",
     "@opam/session": "^0.4.1",
     "@opam/uri": "3.1.0",
-    "ocaml": ">=4.6.0"
+    "ocaml": ">=4.8.0"
   },
   "devDependencies": {
     "ocaml": "~4.9.0",
