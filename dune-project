@@ -3,7 +3,7 @@
 (license BSD3-clause)
 (source (github ulrikstrid/ocaml-cookie))
 (homepage https://ulrikstrid.github.io/ocaml-cookie)
-(documentation https://ulrikstrid.github.io/ocaml-cookiee)
+(documentation https://ulrikstrid.github.io/ocaml-cookie)
 (authors "Ulrik Strid")
 (maintainers "ulrik.strid@outlook.com")
 
