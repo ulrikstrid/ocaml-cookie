@@ -14,5 +14,11 @@ const updateVersion = file => {
 };
 
 Fs.readdirSync(".", { encoding: "utf8" })
-  .filter(file => file.includes(".json") && file.includes("morph"))
+  .filter(
+    file =>
+      file.includes(".json") &&
+      !file.includes("package") &&
+      !file.includes("esy") &&
+      !file.includes("benchmark")
+  )
   .map(updateVersion);

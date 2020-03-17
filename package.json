@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "name": "@reason-native-web/cookie_dev",
   "license": "BSD-3-clause",
   "homepage": "https://github.com/reason-native-web/ocaml-cookie",
@@ -33,7 +33,7 @@
   "devDependencies": {
     "ocaml": "~4.9.0",
     "@opam/alcotest": "*",
-    "@opam/bisect_ppx": "aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca",
+    "@opam/bisect_ppx": "aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169",
     "@opam/merlin": "*",
     "@opam/ocamlformat": "*",
     "@opam/odoc": "*",
