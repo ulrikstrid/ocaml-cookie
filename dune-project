@@ -13,14 +13,18 @@
 
 (package
    (name cookie)
+   (description "Parsing and printing cookies in OCaml and Reason")
    (depends
       (ocaml (>= 4.06.0))
+      uri
+      ptime
       astring
    )
 )
 
 (package
    (name session-cookie)
+   (description "Session implementation using the cookie library")
    (depends
       (ocaml (>= 4.06.0))
       cookie
@@ -30,6 +34,7 @@
 
 (package
    (name session-cookie-async)
+   (description "Session implementation using the cookie library with async support")
    (depends
       (ocaml (>= 4.06.0))
       session-cookie
@@ -39,6 +44,7 @@
 
 (package
    (name session-cookie-lwt)
+   (description "Session implementation using the cookie library with lwt support")
    (depends
       (ocaml (>= 4.06.0))
       session-cookie

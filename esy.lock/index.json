@@ -1,5 +1,5 @@
 {
-  "checksum": "2fde876fd1729266cbd8daade1971543",
+  "checksum": "4a9f86012b3cc29cf008102bb124bad1",
   "root": "@reason-native-web/cookie_dev@link-dev:./package.json",
   "node": {
     "ocaml@4.9.0@d41d8cd9": {
@@ -54,7 +54,7 @@
         "@opam/merlin@opam:3.3.3@d653b06a", "@opam/lwt@opam:5.2.0@31d36dc2",
         "@opam/junit_alcotest@opam:2.0.2@6922b233",
         "@opam/junit@opam:2.0.2@0b7bd730",
-        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9",
+        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169@d41d8cd9",
         "@opam/async@opam:v0.13.0@c4b28450",
         "@opam/alcotest@opam:1.0.1@412cd081"
       ]
@@ -2916,16 +2916,16 @@
       ],
       "devDependencies": [ "ocaml@4.9.0@d41d8cd9" ]
     },
-    "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9": {
+    "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169@d41d8cd9": {
       "id":
-        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca@d41d8cd9",
+        "@opam/bisect_ppx@github:aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169@d41d8cd9",
       "name": "@opam/bisect_ppx",
       "version":
-        "github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca",
+        "github:aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169",
       "source": {
         "type": "install",
         "source": [
-          "github:aantron/bisect_ppx:bisect_ppx.opam#02c841c257126cb7d672ae84da646a1e165d87ca"
+          "github:aantron/bisect_ppx:bisect_ppx.opam#d3adfddddf22fc5698060b08d4ea24595b671169"
         ]
       },
       "overrides": [],
