@@ -33,12 +33,8 @@ jobs:
       - name: Build
         run: esy build
 
-      - name: Test
-        run: esy test
-        if: matrix.os != 'macos-latest'
       - name: Test with coverage
         run: node .github/workflows/test_with_coverage.js
-        if: matrix.os == 'macos-latest'
 
       - name: Build docs
         run: esy docs
