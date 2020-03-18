@@ -1,5 +1,5 @@
 {
-  "version": "0.1.6",
+  "version": "0.1.7",
   "name": "@reason-native-web/session-cookie",
   "license": "BSD-3-clause",
   "homepage": "https://github.com/reason-native-web/ocaml-cookie",
@@ -22,7 +22,7 @@
   "dependencies": {
     "@reason-native-web/cookie": "^0.1.4",
     "@opam/session": "^0.4.1",
-    "ocaml": ">=4.6.0"
+    "ocaml": ">=4.8.0"
   },
   "devDependencies": {
     "ocaml": "~4.9.0",

@@ -3,7 +3,7 @@
 (license BSD3-clause)
 (source (github ulrikstrid/ocaml-cookie))
 (homepage https://ulrikstrid.github.io/ocaml-cookie)
-(documentation https://ulrikstrid.github.io/ocaml-cookiee)
+(documentation https://ulrikstrid.github.io/ocaml-cookie)
 (authors "Ulrik Strid")
 (maintainers "ulrik.strid@outlook.com")
 
@@ -16,10 +16,13 @@
    (synopsis "Cookie handling for OCaml and ReasonML")
    (description "Parsing and printing cookies in OCaml and Reason")
    (depends
-      (ocaml (>= 4.06.0))
+      (ocaml (>= 4.08.0))
       uri
       ptime
       astring
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -28,9 +31,12 @@
    (synopsis "Session handling for OCaml and ReasonML")
    (description "Session implementation using the cookie library")
    (depends
-      (ocaml (>= 4.06.0))
+      (ocaml (>= 4.08.0))
       cookie
       session
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -39,9 +45,12 @@
    (synopsis "Session handling for OCaml and ReasonML")
    (description "Session implementation using the cookie library with async support")
    (depends
-      (ocaml (>= 4.06.0))
+      (ocaml (>= 4.08.0))
       session-cookie
       async
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -50,8 +59,11 @@
    (synopsis "Session handling for OCaml and ReasonML")
    (description "Session implementation using the cookie library with lwt support")
    (depends
-      (ocaml (>= 4.06.0))
+      (ocaml (>= 4.08.0))
       session-cookie
       lwt
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )

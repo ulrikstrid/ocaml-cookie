@@ -33,6 +33,10 @@ jobs:
       run: esy build
     - name: Test
       run: esy test
+      if: matrix.os != 'macos-latest'
+    - name: Test with coverage
+      run: node .github/workflows/test_with_coverage.js
+      if: matrix.os == 'macos-latest'
     - name: Benchmark
       if: matrix.os == 'macos-latest'
       uses: actions/github-script@0.8.0
