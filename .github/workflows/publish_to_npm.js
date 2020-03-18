@@ -26,7 +26,10 @@ const preparePackage = packageData => {
     JSON.stringify(updatedPackageJson, null, 2)
   );
 
-  fs.copyFileSync(`${package}.opam`, Path.join(package, `${package}.opam`));
+  fs.copyFileSync(
+    `${package === "lib" ? "cookie" : package}.opam`,
+    Path.join(package, `${package}.opam`)
+  );
   fs.copyFileSync(`LICENSE`, Path.join(package, "LICENSE"));
   fs.copyFileSync(`README.md`, Path.join(package, "README.md"));
   fs.copyFileSync(`.npmignore`, Path.join(package, ".npmignore"));
