@@ -32,7 +32,7 @@ jobs:
     - name: Build
       run: esy build
     - name: Test
-      run: esy test
+      run: .github/workflows/test_with_coverage.js
     - name: Benchmark
       if: matrix.os == 'macos-latest'
       uses: actions/github-script@0.8.0
