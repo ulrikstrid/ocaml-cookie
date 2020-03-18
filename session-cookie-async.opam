@@ -14,6 +14,9 @@ depends: [
   "ocaml" {>= "4.08.0"}
   "session-cookie"
   "async"
+  "alcotest" {with-test}
+  "junit" {with-test}
+  "junit_alcotest" {with-test}
 ]
 build: [
   ["dune" "subst"] {pinned}

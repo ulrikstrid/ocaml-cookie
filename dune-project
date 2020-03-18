@@ -20,6 +20,9 @@
       uri
       ptime
       astring
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -31,6 +34,9 @@
       (ocaml (>= 4.08.0))
       cookie
       session
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -42,6 +48,9 @@
       (ocaml (>= 4.08.0))
       session-cookie
       async
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
 
@@ -53,5 +62,8 @@
       (ocaml (>= 4.08.0))
       session-cookie
       lwt
+      (alcotest :with-test)
+      (junit :with-test)
+      (junit_alcotest :with-test)
    )
 )
