@@ -28,7 +28,7 @@ const preparePackage = packageData => {
 
   fs.copyFileSync(
     `${package === "lib" ? "cookie" : package}.opam`,
-    Path.join(package, `${package}.opam`)
+    Path.join(package, `${package === "lib" ? "cookie" : package}.opam`)
   );
   fs.copyFileSync(`LICENSE`, Path.join(package, "LICENSE"));
   fs.copyFileSync(`README.md`, Path.join(package, "README.md"));
@@ -57,7 +57,9 @@ const cleanPackage = package => {
   console.log(`Cleaning package ${package}`);
 
   fs.unlinkSync(Path.join(package, "package.json"));
-  fs.unlinkSync(Path.join(package, `${package}.opam`));
+  fs.unlinkSync(
+    Path.join(package, `${package === "lib" ? "cookie" : package}.opam`)
+  );
   try {
     fs.unlinkSync(Path.join(package, `${package}.install`));
   } catch (e) {
