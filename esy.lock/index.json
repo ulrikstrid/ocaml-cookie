@@ -1,5 +1,5 @@
 {
-  "checksum": "80207daa999d86cac3214c13be98780f",
+  "checksum": "e69d1e88b77fa8e0d0c43cd3a2811aed",
   "root": "@reason-native-web/cookie_dev@link-dev:./package.json",
   "node": {
     "ocaml@4.9.0@d41d8cd9": {
@@ -54,7 +54,7 @@
         "@opam/merlin@opam:3.3.3@d653b06a", "@opam/lwt@opam:5.2.0@31d36dc2",
         "@opam/junit_alcotest@opam:2.0.2@6922b233",
         "@opam/junit@opam:2.0.2@0b7bd730",
-        "@opam/bisect_ppx@github:ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5@d41d8cd9",
+        "@opam/bisect_ppx@opam:2.1.0@6e3c2616",
         "@opam/async@opam:v0.13.0@c4b28450",
         "@opam/alcotest@opam:1.0.1@412cd081"
       ]
@@ -387,8 +387,8 @@
         "ocaml@4.9.0@d41d8cd9", "@opam/ocamlbuild@opam:0.14.0@6ac75d03"
       ]
     },
-    "@opam/time_now@opam:v0.13.0@b3c38ba1": {
-      "id": "@opam/time_now@opam:v0.13.0@b3c38ba1",
+    "@opam/time_now@opam:v0.13.0@17250fee": {
+      "id": "@opam/time_now@opam:v0.13.0@17250fee",
       "name": "@opam/time_now",
       "version": "opam:v0.13.0",
       "source": {
@@ -403,7 +403,12 @@
           "path": "esy.lock/opam/time_now.v0.13.0"
         }
       },
-      "overrides": [],
+      "overrides": [
+        {
+          "opamoverride":
+            "esy.lock/overrides/opam__s__time__now_opam__c__v0.13.0_opam_override"
+        }
+      ],
       "dependencies": [
         "ocaml@4.9.0@d41d8cd9", "@opam/ppx_optcomp@opam:v0.13.0@35a02c58",
         "@opam/ppx_base@opam:v0.13.0@7b3a7de2",
@@ -1184,7 +1189,7 @@
       },
       "overrides": [],
       "dependencies": [
-        "ocaml@4.9.0@d41d8cd9", "@opam/time_now@opam:v0.13.0@b3c38ba1",
+        "ocaml@4.9.0@d41d8cd9", "@opam/time_now@opam:v0.13.0@17250fee",
         "@opam/stdio@opam:v0.13.0@eb59d879",
         "@opam/ppxlib@opam:0.12.0@fcf5cabc",
         "@opam/ppx_base@opam:v0.13.0@7b3a7de2",
@@ -1192,7 +1197,7 @@
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
       "devDependencies": [
-        "ocaml@4.9.0@d41d8cd9", "@opam/time_now@opam:v0.13.0@b3c38ba1",
+        "ocaml@4.9.0@d41d8cd9", "@opam/time_now@opam:v0.13.0@17250fee",
         "@opam/stdio@opam:v0.13.0@eb59d879",
         "@opam/ppxlib@opam:0.12.0@fcf5cabc",
         "@opam/ppx_base@opam:v0.13.0@7b3a7de2",
@@ -2753,7 +2758,7 @@
       "dependencies": [
         "ocaml@4.9.0@d41d8cd9", "@opam/variantslib@opam:v0.13.0@7fe1097f",
         "@opam/typerep@opam:v0.13.0@44f322a7",
-        "@opam/time_now@opam:v0.13.0@b3c38ba1",
+        "@opam/time_now@opam:v0.13.0@17250fee",
         "@opam/stdio@opam:v0.13.0@eb59d879",
         "@opam/splittable_random@opam:v0.13.0@cedb875a",
         "@opam/sexplib@opam:v0.13.0@79086695",
@@ -2777,7 +2782,7 @@
       "devDependencies": [
         "ocaml@4.9.0@d41d8cd9", "@opam/variantslib@opam:v0.13.0@7fe1097f",
         "@opam/typerep@opam:v0.13.0@44f322a7",
-        "@opam/time_now@opam:v0.13.0@b3c38ba1",
+        "@opam/time_now@opam:v0.13.0@17250fee",
         "@opam/stdio@opam:v0.13.0@eb59d879",
         "@opam/splittable_random@opam:v0.13.0@cedb875a",
         "@opam/sexplib@opam:v0.13.0@79086695",
@@ -2916,17 +2921,21 @@
       ],
       "devDependencies": [ "ocaml@4.9.0@d41d8cd9" ]
     },
-    "@opam/bisect_ppx@github:ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5@d41d8cd9": {
-      "id":
-        "@opam/bisect_ppx@github:ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5@d41d8cd9",
+    "@opam/bisect_ppx@opam:2.1.0@6e3c2616": {
+      "id": "@opam/bisect_ppx@opam:2.1.0@6e3c2616",
       "name": "@opam/bisect_ppx",
-      "version":
-        "github:ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5",
+      "version": "opam:2.1.0",
       "source": {
         "type": "install",
         "source": [
-          "github:ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5"
-        ]
+          "archive:https://opam.ocaml.org/cache/md5/c8/c8ed055423d80aeeb5a1bac3d512b307#md5:c8ed055423d80aeeb5a1bac3d512b307",
+          "archive:https://github.com/aantron/bisect_ppx/archive/2.1.0.tar.gz#md5:c8ed055423d80aeeb5a1bac3d512b307"
+        ],
+        "opam": {
+          "name": "bisect_ppx",
+          "version": "2.1.0",
+          "path": "esy.lock/opam/bisect_ppx.2.1.0"
+        }
       },
       "overrides": [],
       "dependencies": [

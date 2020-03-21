@@ -33,7 +33,7 @@
   "devDependencies": {
     "ocaml": "~4.9.0",
     "@opam/alcotest": "*",
-    "@opam/bisect_ppx": "*",
+    "@opam/bisect_ppx": "^2.1.0",
     "@opam/merlin": "*",
     "@opam/ocamlformat": "*",
     "@opam/odoc": "*",
@@ -41,8 +41,5 @@
     "@opam/junit_alcotest": "*",
     "@opam/lwt": "*",
     "@opam/async": "*"
-  },
-  "resolutions": {
-    "@opam/bisect_ppx": "ulrikstrid/bisect_ppx:bisect_ppx.opam#b2e664c83f9609799130b3b5e3ad18bcd70984a5"
   }
 }
