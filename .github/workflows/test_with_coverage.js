@@ -62,30 +62,41 @@ function run_tests() {
     env: { ...process.env, BISECT_ENABLE: "yes", REPORT_PATH: "./junit.xml" }
   });
 
-  console.log("Coverage summary:");
-  console.log(
-    Cp.execSync(`esy bisect-ppx-report html`, {
-      encoding: "utf8"
-    }).toString()
-  );
+  console.log("Generating coverage reports");
   console.log(
     Cp.execSync(`esy bisect-ppx-report summary`, {
       encoding: "utf8"
     }).toString()
   );
 
-  console.log("Collecting coverage");
+  console.log(
+    Cp.execSync(`esy bisect-ppx-report html`, {
+      encoding: "utf8"
+    }).toString()
+  );
+
+  console.log("Sending coverage to Codecov");
   Cp.execSync(`esy bisect-ppx-report send-to Codecov`, {
     encoding: "utf8"
   });
 }
 
+const dune_files = [
+  "./lib/dune",
+  "./session-cookie/dune",
+  "./session-cookie-async/dune",
+  "./session-cookie-lwt/dune"
+];
+
 clean_local();
-const prev_dune = patch_dune("./lib/dune");
+const prev_dune_files = dune_files.map(file => ({
+  prev: patch_dune(file),
+  file
+}));
 try {
   run_tests();
 } catch (e) {
   console.error(e);
 }
-revert_dune("./lib/dune", prev_dune);
+prev_dune_files.forEach(x => revert_dune(x.file, x.prev));
 console.log("Done.");
