@@ -76,7 +76,7 @@ jobs:
         opam pin add session-cookie-async.dev -n . -k path
         opam pin add session-cookie-lwt.dev -n . -k path
     - run: opam depext -y
-    - run: opam install -y --deps-only .
+    - run: opam install -y --deps-only --with-test .
     - run: opam exec -- dune build --root=.
     - run: opam exec -- dune build --root=. @runtest
   publish-to-npm:
