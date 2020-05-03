@@ -6,7 +6,7 @@ on:
     - master
 
 jobs:
-  build:
+  esy:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -59,3 +59,31 @@ jobs:
             ${benchmark}
             \`\`\``
           });
+
+  opam:
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os:
+            - ubuntu-latest
+            - macos-latest
+          ocaml:
+            - 4.10.0
+            - 4.09.1
+            - 4.08.1
+            - 4.07.1
+        fail-fast: false
+    steps:
+    - uses: actions/checkout@master
+    - uses: avsm/setup-ocaml@master
+      with:
+        ocaml-version: ${{ matrix.ocaml }}
+    - run: |
+        opam pin add cookie.dev -n cookie.opam
+        opam pin add session-cookie.dev -n session-cookie.opam
+        opam pin add session-cookie-async.dev -n session-cookie-async.opam
+        opam pin add session-cookie-lwt.dev -n session-cookie-lwt.opam
+    - run: opam depext -y
+    - run: opam install -y --deps-only .
+    - run: opam exec -- dune build --root=.
+    - run: opam exec -- dune build --root=. @runtest

@@ -181,6 +181,6 @@ let cookies_of_header (key, value) =
       String.split_on_char ';' value
       |> List.map (String.split_on_char '=')
       |> List.filter_map (function
-           | [ key; value ] -> Some (key, value)
+           | [ key; value ] -> Some (String.trim key, String.trim value)
            | _ -> None)
   | _ -> []
