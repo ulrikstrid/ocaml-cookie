@@ -60,12 +60,13 @@ let tests =
                      if key = "Set-Cookie" then Some (key, value) else None)
                    test_headers
                  |> Base.List.filter_map
-                      ~f:(Cookie.of_set_cookie_header ~origin:"home.example.org")
+                      ~f:
+                        (Cookie.of_set_cookie_header ~origin:"home.example.org")
                in
                let now =
-                   Base.Option.( Cookie.Date.parse "Wen, 28 Feb 2018 08:04:19 GMT"
-                   |> opt_of_result
-                   >>= Ptime.of_date_time )
+                 Base.Option.(
+                   Cookie.Date.parse "Wen, 28 Feb 2018 08:04:19 GMT"
+                   |> opt_of_result >>= Ptime.of_date_time)
                in
                let test =
                  set_cookie_headers |> Cookie.to_cookie_header ?now ~scope
