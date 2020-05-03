@@ -75,7 +75,7 @@ let zero_pad ~len str =
 
 (* Fri, 07 Aug 2007 08:04:19 GMT *)
 let serialize date_time =
-  let ptime = Ptime.of_date_time date_time |> Option.get in
+  let ptime = Ptime.of_date_time date_time |> Util.Option.get_exn in
   let weekday = Ptime.weekday ptime |> string_of_weekday in
   let (year, month, day), ((hour, minute, second), _) = date_time in
   Printf.sprintf "%s, %s %s %s %s:%s:%s UTC" weekday
