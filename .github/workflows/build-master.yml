@@ -51,6 +51,34 @@ jobs:
           BRANCH: gh-pages
           CLEAN: true
           FOLDER: ${{ steps.print_docs_path.outputs.docs_path }}
+  opam:
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os:
+            - ubuntu-latest
+            - macos-latest
+          ocaml:
+            - 4.10.0
+            - 4.09.1
+            - 4.08.1
+            - 4.07.1
+        fail-fast: false
+    steps:
+    - uses: actions/checkout@master
+    - uses: avsm/setup-ocaml@master
+      with:
+        ocaml-version: ${{ matrix.ocaml }}
+    - run: opam lint
+    - run: |
+        opam pin add cookie.dev -n . -k path
+        opam pin add session-cookie.dev -n . -k path
+        opam pin add session-cookie-async.dev -n . -k path
+        opam pin add session-cookie-lwt.dev -n . -k path
+    - run: opam depext -y
+    - run: opam install -y --deps-only .
+    - run: opam exec -- dune build --root=.
+    - run: opam exec -- dune build --root=. @runtest
   publish-to-npm:
     needs: build-and-deploy
     runs-on: ubuntu-latest

@@ -78,11 +78,12 @@ jobs:
     - uses: avsm/setup-ocaml@master
       with:
         ocaml-version: ${{ matrix.ocaml }}
+    - run: opam lint
     - run: |
-        opam pin add cookie.dev -n cookie.opam
-        opam pin add session-cookie.dev -n session-cookie.opam
-        opam pin add session-cookie-async.dev -n session-cookie-async.opam
-        opam pin add session-cookie-lwt.dev -n session-cookie-lwt.opam
+        opam pin add cookie.dev -n . -k path
+        opam pin add session-cookie.dev -n . -k path
+        opam pin add session-cookie-async.dev -n . -k path
+        opam pin add session-cookie-lwt.dev -n . -k path
     - run: opam depext -y
     - run: opam install -y --deps-only .
     - run: opam exec -- dune build --root=.
