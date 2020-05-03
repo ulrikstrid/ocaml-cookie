@@ -1,6 +1,6 @@
 0.1.8
 --------------
-- Fix bug where spaces were cept when parsing cookie headers
+- Fix bug where spaces were kept when parsing cookie headers
 - Add session libraries
 - Support for OCaml 4.07.1
 
