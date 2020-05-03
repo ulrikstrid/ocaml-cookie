@@ -19,8 +19,9 @@ let expires_of_tuple (key, value) =
   String.lowercase_ascii key |> function
   | "max-age" -> Some (`MaxAge (Int64.of_string value))
   | "expires" ->
-      Date.parse value |> Result.get_ok |> Ptime.of_date_time
-      |> Option.map (fun e -> `Date e)
+      Date.parse value |> Util.Option.of_result
+      |> Util.Option.flat_map Ptime.of_date_time
+      |> Util.Option.map (fun e -> `Date e)
   | _ -> None
 
 type same_site = [ `None | `Strict | `Lax ]
@@ -61,9 +62,9 @@ let of_set_cookie_header ?origin:_ ((_, value) : header) =
             let expires =
               Util.Option.first_some
                 ( Attributes.AMap.find_opt "expires" attrs
-                |> Option.map (fun v -> ("expires", v)) )
+                |> Util.Option.map (fun v -> ("expires", v)) )
                 ( Attributes.AMap.find_opt "max-age" attrs
-                |> Option.map (fun v -> ("max-age", v)) )
+                |> Util.Option.map (fun v -> ("max-age", v)) )
               |> Util.Option.flat_map (fun a -> expires_of_tuple a)
             in
             let secure = Attributes.AMap.key_exists ~key:"secure" attrs in
@@ -75,7 +76,7 @@ let of_set_cookie_header ?origin:_ ((_, value) : header) =
             let scope =
               Uri.empty |> fun uri ->
               Uri.with_host uri domain |> fun uri ->
-              Option.map (Uri.with_path uri) path
+              Util.Option.map (Uri.with_path uri) path
               |> Util.Option.get_default ~default:uri
             in
             Some (make ?expires ~scope ~secure ~http_only value))
@@ -180,7 +181,7 @@ let cookies_of_header (key, value) =
   | "Cookie" | "cookie" ->
       String.split_on_char ';' value
       |> List.map (String.split_on_char '=')
-      |> List.filter_map (function
+      |> Util.List.filter_map (function
            | [ key; value ] -> Some (String.trim key, String.trim value)
            | _ -> None)
   | _ -> []

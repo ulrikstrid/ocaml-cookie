@@ -27,8 +27,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - multiple Max-Age" `Quick (fun () ->
@@ -37,8 +37,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - trailing =" `Quick (fun () ->
@@ -47,8 +47,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - . before domain" `Quick (fun () ->
@@ -57,8 +57,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - .. before domain" `Quick (fun () ->
@@ -67,8 +67,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - . after domain" `Quick (fun () ->
@@ -77,8 +77,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - custom value" `Quick (fun () ->
@@ -87,8 +87,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - extra empty - 1" `Quick (fun () ->
@@ -97,8 +97,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
       Alcotest.test_case "roundtrip - extra empty - 2" `Quick (fun () ->
@@ -107,8 +107,8 @@ let tests =
           let test =
             Cookie.of_set_cookie_header ("Set-Cookie", input)
               ~origin:"home.example.org"
-            |> Option.map Cookie.to_set_cookie_header
-            |> Option.map snd
+            |> Base.Option.map ~f:Cookie.to_set_cookie_header
+            |> Base.Option.map ~f:snd
           in
           check_option_string "value" (Some expected) test);
     ]
@@ -121,8 +121,8 @@ let tests =
               let test =
                 Cookie.of_set_cookie_header ("Set-Cookie", expected)
                   ~origin:"home.example.org"
-                |> Option.map Cookie.to_set_cookie_header
-                |> Option.map snd
+                |> Base.Option.map ~f:Cookie.to_set_cookie_header
+                |> Base.Option.map ~f:snd
               in
               check_option_string "value" (Some expected) test))
         cases )

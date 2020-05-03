@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "ocaml": "~4.9.0",
+    "@opam/base": "*",
     "@opam/alcotest": "*",
     "@opam/bisect_ppx": "^2.2.0",
     "@opam/merlin": "*",

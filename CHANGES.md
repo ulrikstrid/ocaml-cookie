@@ -2,6 +2,7 @@
 --------------
 - Fix bug where spaces were cept when parsing cookie headers
 - Add session libraries
+- Support for OCaml 4.07.1
 
 0.1.7
 --------------

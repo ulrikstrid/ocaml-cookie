@@ -1,5 +1,5 @@
 {
-  "checksum": "082c2c2f45c8a706a013ea14a2d02863",
+  "checksum": "7e3a6e6bda8ef656936ee9793e3fee8b",
   "root": "@reason-native-web/cookie_dev@link-dev:./package.json",
   "node": {
     "ocaml@4.9.0@d41d8cd9": {
@@ -55,6 +55,7 @@
         "@opam/junit_alcotest@opam:2.0.2@6922b233",
         "@opam/junit@opam:2.0.2@0b7bd730",
         "@opam/bisect_ppx@opam:2.4.0@8b9a7008",
+        "@opam/base@opam:v0.13.1@7d937ed0",
         "@opam/async@opam:v0.13.0@c4b28450",
         "@opam/alcotest@opam:1.1.0@c50ee246"
       ]

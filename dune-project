@@ -35,6 +35,7 @@
       (ocaml (>= 4.07.0))
       (cookie (= :version))
       session
+      (base :with-test)
       (alcotest :with-test)
       (junit :with-test)
       (junit_alcotest :with-test)
