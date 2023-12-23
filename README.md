@@ -1,6 +1,6 @@
 # Cookie
 
-A Cookie implementation i pure OCaml
+A Cookie implementation in pure OCaml.
 
 ## Session
 
